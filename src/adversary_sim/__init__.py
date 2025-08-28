@@ -1,1 +1,1 @@
-from .core import Play, Context
+from .core import Play as Play, Context as Context
