@@ -18,7 +18,7 @@ RFC1918 = [
 
 def _is_private_ip(host: str) -> bool:
     try:
-        ip = ipaddress.ip_address(host)
+        ipaddress.ip_address(host)
         return any(ip in net for net in RFC1918)
     except ValueError:
         return host in ("localhost",)
@@ -29,7 +29,7 @@ def _url_is_private(url: str) -> bool:
     if host in ("localhost",):
         return True
     try:
-        ip = ipaddress.ip_address(host)
+        ipaddress.ip_address(host)
         return any(ip in net for net in RFC1918)
     except Exception:
         return False
@@ -44,7 +44,7 @@ class Context:
 
     def in_scope(self, host: str) -> bool:
         try:
-            ip = ipaddress.ip_address(host)
+            ipaddress.ip_address(host)
         except ValueError:
             return host in ("localhost",)
         nets = [ipaddress.ip_network(c) for c in self.scope_allowlist]
@@ -96,7 +96,7 @@ def guard_target_host(host: str, ctx: Context):
     if host in ("localhost",):
         return
     try:
-        ip = ipaddress.ip_address(host)
+        ipaddress.ip_address(host)
     except ValueError:
         if host != "localhost":
             raise SystemExit(f"[DENY] Non-private hostname not allowed: {host}")
