@@ -34,6 +34,7 @@ class ExfilLocalSink(Play):
         }
 
 
+
     def expected_signals(self):
         return ["Proxy/Firewall egress log", "DLP: outbound data event", "Sink HTTP access log"]
 
