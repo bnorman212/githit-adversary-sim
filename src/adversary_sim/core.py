@@ -111,9 +111,13 @@ def guard_target_url(url: str, ctx: Context):
         raise SystemExit(f"[DENY] URL host must be private/localhost for lab use: {url}")
     host = (urlparse(url).hostname or "")
     try:
-        ipaddress.ip_address(host)
+        ipaddress.ip_address(host)  # validate IP (no need to assign)
         if not ctx.in_scope(host):
             raise SystemExit(f"[DENY] URL host {host} not in scope_allowlist")
+    except ValueError:
+        if host not in ("localhost",):
+            raise SystemExit(f"[DENY] Non-private hostname not allowed: {host}")
+
     except ValueError:
         if host not in ("localhost",):
             raise SystemExit(f"[DENY] Non-private hostname not allowed: {host}")
