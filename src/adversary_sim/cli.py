@@ -1,6 +1,9 @@
 
-import argparse, time
-from .core import require_consent, load_config, Context, load_play, save_run
+import argparse
+import time
+
+from .core import Context, load_config, load_play, require_consent, save_run
+
 
 def main():
     ap = argparse.ArgumentParser(description="GitHit! — Blue-team safe adversary simulator (lab only).")

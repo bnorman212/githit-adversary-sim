@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+
 class Sink(BaseHTTPRequestHandler):
     def do_POST(self):
         ln = int(self.headers.get('Content-Length', '0'))

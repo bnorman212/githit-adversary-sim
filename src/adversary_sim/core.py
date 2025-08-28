@@ -1,9 +1,13 @@
 
-import os, sys, time, json, ipaddress, importlib
+import importlib
+import ipaddress
+import json
+import os
+import sys
 from dataclasses import dataclass
-from typing import List, Dict, Any
-from urllib.parse import urlparse
 from pathlib import Path
+from typing import Any, Dict, List
+from urllib.parse import urlparse
 
 RFC1918 = [
     ipaddress.ip_network("10.0.0.0/8"),

@@ -1,7 +1,10 @@
 
-import socket, time
-from typing import Dict, Any, List
-from ..core import Play, Context, guard_target_host
+import socket
+import time
+from typing import Any, Dict, List
+
+from ..core import Context, Play, guard_target_host
+
 
 class ReconPlay(Play):
     id = "recon_local"

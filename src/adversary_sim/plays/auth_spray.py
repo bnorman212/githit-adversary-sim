@@ -1,7 +1,10 @@
 
-import os, time
-from typing import Dict, Any, List
-from ..core import Play, Context
+import os
+import time
+from typing import Any, Dict, List
+
+from ..core import Context, Play
+
 
 class AuthSpraySynthetic(Play):
     id = "auth_spray_lab"

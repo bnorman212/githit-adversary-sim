@@ -1,7 +1,11 @@
 
-import os, time, urllib.request
-from typing import Dict, Any
-from ..core import Play, Context, guard_target_url
+import os
+import time
+import urllib.request
+from typing import Any, Dict
+
+from ..core import Context, Play, guard_target_url
+
 
 class ExfilLocalSink(Play):
     id = "exfil_local_sink"
