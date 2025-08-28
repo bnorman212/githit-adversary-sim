@@ -22,6 +22,8 @@ package-dir = {"" = "src"}
 packages = ["adversary_sim", "adversary_sim.plays"]
 
 [tool.ruff]
-line-length = 100
+line-length = 120
 target-version = "py311"
+
+[tool.ruff.lint]
 select = ["E","F","I"]
