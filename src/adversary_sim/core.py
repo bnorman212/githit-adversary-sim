@@ -43,12 +43,13 @@ class Context:
     out_dir: str = "runs"
 
     def in_scope(self, host: str) -> bool:
-        try:
-            ipaddress.ip_address(host)
-        except ValueError:
-            return host in ("localhost",)
-        nets = [ipaddress.ip_network(c) for c in self.scope_allowlist]
-        return any(ip in n for n in nets)
+    try:
+        ip_obj = ipaddress.ip_address(host)
+    except ValueError:
+        return host in ("localhost",)
+    nets = [ipaddress.ip_network(c) for c in self.scope_allowlist]
+    return any(ip_obj in n for n in nets)
+
 
 class Play:
     id = "base"
@@ -96,15 +97,16 @@ def guard_target_host(host: str, ctx: Context):
     if host in ("localhost",):
         return
     try:
-        ipaddress.ip_address(host)
+        ip_obj = ipaddress.ip_address(host)
     except ValueError:
         if host != "localhost":
             raise SystemExit(f"[DENY] Non-private hostname not allowed: {host}")
         return
-    if not any(ip in net for net in RFC1918):
+    if not any(ip_obj in net for net in RFC1918):
         raise SystemExit(f"[DENY] Target host must be RFC1918/localhost, got {host}")
     if not ctx.in_scope(host):
         raise SystemExit(f"[DENY] {host} not in scope_allowlist")
+
 
 def guard_target_url(url: str, ctx: Context):
     if not _url_is_private(url):
