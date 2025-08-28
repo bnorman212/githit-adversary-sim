@@ -25,7 +25,14 @@ class ExfilLocalSink(Play):
             status = resp.status
             body = resp.read(128).decode("utf-8", errors="ignore")
         dur = time.time() - start
-        return {"url": self.target_url, "bytes": self.bytes, "status": status, "duration_s": round(dur,2), "preview": body}
+        return {
+            "url": self.target_url,
+            "bytes": self.bytes,
+            "status": status,
+            "duration_s": round(dur, 2),
+            "preview": body,
+        }
+
 
     def expected_signals(self):
         return ["Proxy/Firewall egress log", "DLP: outbound data event", "Sink HTTP access log"]
