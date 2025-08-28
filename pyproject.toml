@@ -1,0 +1,27 @@
+[project]
+name = "githit-adversary-sim"
+version = "0.1.0"
+description = "GitHit! — Blue-team safe adversary simulator with strict lab-only guardrails."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name="Brittany Norman"}]
+dependencies = [
+    "pyyaml>=6.0.0"
+]
+
+[project.scripts]
+adversary-sim = "adversary_sim.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["adversary_sim", "adversary_sim.plays"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E","F","I"]

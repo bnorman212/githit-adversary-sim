@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  sink:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["python", "examples/start_sink.py"]
+    ports:
+      - "8080:8080"
+  sim:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - sink
+    environment:
+      - I_UNDERSTAND_AND_HAVE_PERMISSION=YES
+    command: ["adversary-sim", "--config", "examples/config.lab.json"]
+    volumes:
+      - ./runs:/app/runs

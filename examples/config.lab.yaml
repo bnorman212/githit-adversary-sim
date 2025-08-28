@@ -1,0 +1,25 @@
+run_id: sim-001
+scope_allowlist:
+  - 127.0.0.1/32
+  - 192.168.56.0/24
+labels:
+  env: lab
+  owner: secops
+pacing:
+  max_concurrent: 8
+  min_delay_ms: 50
+  jitter_ms: 25
+plays:
+  - id: recon_local
+    module: adversary_sim.plays.recon
+    target_host: 127.0.0.1
+    ports: [22,80,443,8080]
+  - id: auth_spray_lab
+    module: adversary_sim.plays.auth_spray
+    log_path: lab_logs/auth.log
+    attempts: 8
+    usernames: ["labuser","dev","guest"]
+  - id: exfil_local_sink
+    module: adversary_sim.plays.exfil
+    target_url: "http://127.0.0.1:8080/upload"
+    bytes: 131072
